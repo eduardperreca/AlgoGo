@@ -3,6 +3,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"strconv"
 	"time"
 )
 
@@ -10,9 +12,10 @@ func main() {
 
 	start := time.Now()
 
-	var a, b, risultato int
-	fmt.Println("inserisci qui due numeri da moltiplicare: ")
-	fmt.Scan(&a, &b)
+	a, _ := strconv.Atoi(os.Args[1])
+	b, _ := strconv.Atoi(os.Args[2])
+
+	var risultato int
 	for ; b > 0; b-- {
 		risultato += a
 	}
