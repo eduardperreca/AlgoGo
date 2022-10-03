@@ -32,34 +32,24 @@ import (
 	"time"
 )
 
+
+func factorial(n int) int{
+	if n == 0{
+		return 1
+	} else{
+		return n*factorial(n-1)
+	}
+}
+
+
 func main() {
 
 	start := time.Now()
 
 	a, _ := strconv.Atoi(os.Args[1])
-	b, _ := strconv.Atoi(os.Args[2])
 
-	risultato, i := potenza(a, b)	
+	risultato := factorial(a)	
 
 	fmt.Println("risultato: ", risultato)
-	fmt.Println("ripetuto: ", i, " volte")
 	fmt.Println("sta roba ci ha messo: ", time.Since(start))
-}
-
-func potenza(x, y int) (int, int) {
-	fmt.Println("qui ci sono")
-	if y == 0 {
-		return 1, 1
-	} else {
-		fmt.Println("potenza(", x, ",", y, ")")
-		power, i := potenza(x, y/2)
-		fmt.Println("power: ", power, "x: ", x, "y: ", y, "i: ", i)
-		power *= power
-		fmt.Println(power)
-		if y%2 != 0 {
-			power *= x
-			i++
-		}
-		return power, i
-	}
 }
