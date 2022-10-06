@@ -1,4 +1,3 @@
-
 /* algoritmo potenza logaritmicad */
 
 /*
@@ -32,15 +31,13 @@ import (
 	"time"
 )
 
-
-func factorial(n int) int{
-	if n == 0{
+func factorial(n int) int {
+	if n == 0 {
 		return 1
-	} else{
-		return n*factorial(n-1)
+	} else {
+		return n * factorial(n-1)
 	}
 }
-
 
 func main() {
 
@@ -48,7 +45,7 @@ func main() {
 
 	a, _ := strconv.Atoi(os.Args[1])
 
-	risultato := factorial(a)	
+	risultato := factorial(a)
 
 	fmt.Println("risultato: ", risultato)
 	fmt.Println("sta roba ci ha messo: ", time.Since(start))
