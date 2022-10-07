@@ -21,15 +21,15 @@ func recursiveDaysLength(slice []int, check int) int {
 			slice = append(slice, 8)
 		}
 	}
-	fmt.Println(slice)
+	// fmt.Println(slice)
 
-	return recursiveDaysLength(slice, check-1)
+	return recursiveDaysLength(slice, check)
 }
 
 func main() {
 
 	toParse := []int{3, 4, 3, 1, 2}
-	days := 18
+	days := 100
 	t := recursiveDaysLength(toParse, days)
 	fmt.Println(t)
 	// 	for _, k := range numbers {
