@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 
 	toParse := []int{3, 4, 3, 1, 2}
-	// var mappa = make(map[int]int)
+	var mappa = make(map[int]int)
 	i := 0
 	check := 0
 	for {
