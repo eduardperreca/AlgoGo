@@ -18,9 +18,7 @@ func insertionSortRec(array []int) []int {
 }
 
 func main() {
-
 	array := []int{1, 4, 12, 8, 6, 32, 9}
 	fmt.Println(array)
 	fmt.Println(insertionSortRec(array))
-
 }
