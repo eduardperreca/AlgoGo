@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Node struct {
 	Value int
@@ -54,6 +56,14 @@ func printList(list *List) {
 	}
 }
 
+func size(list *List) int {
+	var size int
+	for node := list.Head; node != nil; node = node.Next {
+		size++
+	}
+	return size
+}
+
 func reversePrintList(list *List) {
 	if list.Head == nil {
 		return
@@ -91,6 +101,10 @@ func main() {
 	fmt.Print("lista pulita dell'ultimo nodo")
 
 	fmt.Println()
+
+	t := size(&l)
+	fmt.Println(t)
+
 	deleteAll(&l)
 	printList(&l)
 	fmt.Print("lista pulita")
