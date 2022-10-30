@@ -25,17 +25,17 @@ func addNewNode(list *List, value int) {
 	}
 }
 
-func sortingList(list *List) {
-	var node *Node
-	var node2 *Node
-	for node = list.Head; node != nil; node = node.Next {
-		for node2 = node.Next; node2 != nil; node2 = node2.Next {
-			if node.Value > node2.Value {
-				node.Value, node2.Value = node2.Value, node.Value
-			}
-		}
-	}
-}
+// func sortingList(list *List) {
+// 	var node *Node
+// 	var node2 *Node
+// 	for node = list.Head; node != nil; node = node.Next {
+// 		for node2 = node.Next; node2 != nil; node2 = node2.Next {
+// 			if node.Value > node2.Value {
+// 				node.Value, node2.Value = node2.Value, node.Value
+// 			}
+// 		}
+// 	}
+// }
 
 func printList(l *List) {
 	for node := l.Head; node != nil; node = node.Next {
@@ -55,7 +55,6 @@ func main() {
 	addNewNode(&l, 9)
 	printList(&l)
 	fmt.Println("Sorting...")
-	sortingList(&l)
 	printList(&l)
 	fmt.Println("Done!")
 
