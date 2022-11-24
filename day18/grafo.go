@@ -40,10 +40,10 @@ func (l *LinkedList) add(value int) {
 }
 
 func readGraph() *grafo {
-	var n, m int
-	fmt.Scan(&n, &m)
+	var n int
+	fmt.Scan(&n)
 	g := newGraph(n)
-	for i := 0; i < m; i++ {
+	for i := 0; i < n; i++ {
 		var a, b int
 		fmt.Scan(&a, &b)
 		g.adiacenti[a].add(b)
@@ -64,13 +64,10 @@ func printGraph(g *grafo) {
 	}
 }
 
-func check(g *grafo, x int, y int) bool{
-	if g.adiacenti[x].head == nil{
-		return false
-	}
-	current := g.adiacenti[x].head
-	for current != nil{x
-		if current.value == y{
+func checkEdge(g *grafo, a, b int) bool {
+	current := g.adiacenti[a].head
+	for current != nil {
+		if current.value == b {
 			return true
 		}
 		current = current.next
