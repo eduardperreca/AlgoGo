@@ -8,17 +8,17 @@ import (
 	"strings"
 )
 
-func min(a, b, c int) int {
-	if a < b && a < c {
+func max(a, b, c int) int {
+	if a > b && a > c {
 		return a
-	} else if b < c {
+	} else if b > c {
 		return b
 	}
 	return c
 }
 
 func getRes(l, w, h int) int {
-	return 2*l*w + 2*w*h + 2*h*l + min(l*w, w*h, h*l)
+	return 2*l + 2*w + 2*h - 2*max(l, w, h) + l*w*h
 }
 
 func main() {
