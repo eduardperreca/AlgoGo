@@ -55,5 +55,7 @@ func main() {
 		}
 	}
 
+	fmt.Println(visited)
+	fmt.Println(visited2)
 	fmt.Println(len(visited), len(visited2), len(visited)+len(visited2))
 }
