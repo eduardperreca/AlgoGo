@@ -50,7 +50,7 @@ func main() {
 		for j := 1; j < m; j++ {
 			fmt.Println(dp[0][0], dp[1][1])
 			dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + matrix[i][j]
-			// fmt.Println(dp[i][j], matrix[i][j], dp[i-1][j], dp[i][j-1])
+			// fmt.Println(dp[i][j], matrix[i][j], dp[i-1][j], dp[i][j-1)
 		}
 	}
 	fmt.Println(dp)
