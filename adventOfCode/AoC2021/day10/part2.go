@@ -5,82 +5,74 @@ import (
 	"fmt"
 	"os"
 	"sort"
-	"strings"
 )
 
-func max(a int, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
 func main() {
+
 	f, _ := os.Open("input.txt")
-	scanner := bufio.NewScanner(f)
+	b := bufio.NewScanner(f)
 
-	var pile []string
-	var abs []int
-	for scanner.Scan() {
-		input := scanner.Text()
-		check := "{[(<"
-		pile = []string{}
-		for _, k := range input {
-			if strings.Contains(check, string(k)) {
-				pile = append(pile, string(k))
-			} else {
-				if pile[len(pile)-1] == "(" && string(k) != ")" {
-					continue
-				} else if pile[len(pile)-1] == "[" && string(k) != "]" {
-					continue
-				} else if pile[len(pile)-1] == "{" && string(k) != "}" {
-					continue
-				} else if pile[len(pile)-1] == "<" && string(k) != ">" {
-					continue
-				} else {
-					pile = pile[:len(pile)-1]
-				}
-			}
-		}
-		// fmt.Println(pile)
-		dummy := ""
-		tot := 0
-		for i := len(pile) - 1; i >= 0; i-- {
-			if pile[i] == "(" {
-				dummy += ")"
-				tot = 5*tot + 1
-			} else if pile[i] == "[" {
-				dummy += "]"
-				tot = 5*tot + 2
-			} else if pile[i] == "{" {
-				dummy += "}"
-				tot = 5*tot + 3
-			} else if pile[i] == "<" {
-				dummy += ">"
-				tot = 5*tot + 4
-			}
-			// fmt.Println(tot)
-		}
-		abs = append(abs, tot)
-		fmt.Println(dummy)
-
+	values := map[string]bool{
+		"{": true,
+		"[": true,
+		"(": true,
+		"<": true,
 	}
-	sort.Ints(abs)
-	fmt.Println(len(abs))
-	fmt.Println(abs[(len(abs)/2)])
-	// for pile.Head != nil {
-	// 	fmt.Print(pile.Head.Value)
-	// 	if pile.Head.Value == "(" {
-	// 		dummy += ")"
-	// 	} else if pile.Head.Value == "[" {
-	// 		dummy += "]"
-	// 	} else if pile.Head.Value == "{" {
-	// 		dummy += "}"
-	// 	} else if pile.Head.Value == "<" {
-	// 		dummy += ">"
-	// 	}
-	// 	pile.Head = pile.Head.Next
-	// }
-	// fmt.Println()
-	// fmt.Print(dummy)
+
+	valuestoAdd := map[string]int{
+		"(": 1,
+		"[": 2,
+		"{": 3,
+		"<": 4,
+	}
+
+	stackTotal := [][]string{}
+	stack := []string{}
+	for b.Scan() {
+		buono := true
+		stack = []string{}
+		for _, k := range b.Text() {
+			if values[string(k)] {
+				stack = append(stack, string(k))
+				// fmt.Println(stack)
+			} else {
+				check := stack[len(stack)-1]
+				if string(k) == "}" && check != "{" {
+					buono = false
+					break
+				} else if string(k) == "]" && check != "[" {
+					buono = false
+					break
+				} else if string(k) == ")" && check != "(" {
+					buono = false
+					break
+				} else if string(k) == ">" && check != "<" {
+					buono = false
+					break
+				}
+				stack = stack[:len(stack)-1]
+			}
+		}
+		if buono {
+			stackTotal = append(stackTotal, stack)
+		}
+	}
+
+	// fmt.Println(stackTotal)
+
+	totVet := []int{}
+	tot := 0
+	for _, k := range stackTotal {
+		tot = 0
+		for i := len(k) - 1; i >= 0; i-- {
+			tot = tot*5 + valuestoAdd[k[i]]
+		}
+		totVet = append(totVet, tot)
+	}
+	// fmt.Println(totVet)
+	fmt.Println(len(stackTotal))
+	fmt.Println(len(totVet))
+	sort.Ints(totVet)
+	fmt.Println(totVet)
+	fmt.Println(totVet[len(totVet)/2])
 }

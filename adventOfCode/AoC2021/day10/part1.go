@@ -4,77 +4,46 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strings"
 )
-
-type Node struct {
-	Value string
-	Next  *Node
-}
-
-type Pile struct {
-	Head *Node
-}
-
-func newNode(value string) *Node {
-	return &Node{Value: value}
-}
-
-func addNewNode(pile *Pile, value string) {
-	newNode := newNode(value)
-	newNode.Next = pile.Head
-	pile.Head = newNode
-}
-
-func pop(p *Pile) string {
-	if p.Head == nil {
-		return ""
-	}
-	value := p.Head.Value
-	p.Head = p.Head.Next
-	return value
-}
-
-func push(p *Pile, value string) {
-	addNewNode(p, value)
-}
 
 func main() {
 
-	var pile Pile
-	// ): 3 points.
-	// ]: 57 points.
-	// }: 1197 points.
-	// >: 25137 points.
-
-	var pile2 Pile
-
 	f, _ := os.Open("input.txt")
-	scanner := bufio.NewScanner(f)
-	for scanner.Scan() {
-		input := scanner.Text()
-		check := "{[(<"
-		for _, k := range input {
-			if strings.Contains(check, string(k)) {
-				push(&pile, string(k))
+	b := bufio.NewScanner(f)
+
+	values := map[string]bool{
+		"{": true,
+		"[": true,
+		"(": true,
+		"<": true,
+	}
+
+	counter := 0
+	stack := []string{}
+	
+	for b.Scan() {
+		for _, k := range b.Text() {
+			if values[string(k)] {
+				stack = append(stack, string(k))
+				fmt.Println(stack)
 			} else {
-				if k == ')' && pile.Head.Value != "(" {
-					push(&pile2, string(k))
-				} else if k == ']' && pile.Head.Value != "[" {
-					push(&pile2, string(k))
-				} else if k == '}' && pile.Head.Value != "{" {
-					push(&pile2, string(k))
-				} else if k == '>' && pile.Head.Value != "<" {
-					push(&pile2, string(k))
-				} else{
-					pop(&pile)
+				check := stack[len(stack)-1]
+				if string(k) == "}" && check != "{" {
+					counter += 1197
+					break
+				} else if string(k) == "]" && check != "[" {
+					counter += 57
+					break
+				} else if string(k) == ")" && check != "("  {
+					counter += 3
+					break
+				} else if string(k) == ">" && check != "<" {
+					counter += 25137
+					break
 				}
+				stack = stack[:len(stack)-1]
 			}
 		}
 	}
-	for pile2.Head != nil {
-		fmt.Println(pile2.Head.Value)
-		pile2.Head = pile2.Head.Next
-	}
-
+	fmt.Println(counter)
 }
