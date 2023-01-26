@@ -47,7 +47,7 @@ func main() {
 
 	p := l.Head
 	z := f(p, 10)
-	
+
 	fmt.Println(z)
 
 }

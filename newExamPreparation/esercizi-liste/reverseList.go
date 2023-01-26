@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 type Node struct {
 	Next *Node
 	Val  int
@@ -25,16 +23,6 @@ func addNewNode(l *linkedList, k int) {
 	}
 }
 
-func reverseList(head *Node) *Node {
-	var prev *Node
-	for head != nil {
-		prev, head, head.Next = head, head.Next, prev
-		fmt.Println(prev, head, head.Next)
-		fmt.Println(head, head.Next, prev)
-	}
-	return prev
-}
-
 func main() {
 
 	var l = &linkedList{}
@@ -44,8 +32,5 @@ func main() {
 	addNewNode(l, 12)
 	addNewNode(l, 4)
 	addNewNode(l, 10)
-
-	node := l.Head
-	reverseList(node)
 
 }

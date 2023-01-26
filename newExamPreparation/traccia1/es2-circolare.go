@@ -72,7 +72,6 @@ func sizeOf(p *Node) int {
 }
 
 func sposta(p *Node) {
-
 	node := p
 	var visited = make(map[int]bool)
 	for {
@@ -83,16 +82,15 @@ func sposta(p *Node) {
 			visited[node.Val] = true
 			n := abs(node.Val)
 			for i := 0; i < n; i++ {
-				if node.Val >= 0 {
-					node.Val, node.Next.Val = node.Next.Val, node.Val
-				} else {
+				if node.Val > 0 {
 					node.Val, node.Previous.Val = node.Previous.Val, node.Val
+				} else if node.Val < 0 {
+					node.Val, node.Next.Val = node.Next.Val, node.Val
 				}
 			}
 		}
 		node = node.Next
 	}
-
 }
 
 func main() {
