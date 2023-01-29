@@ -38,8 +38,10 @@ func dequeue(l *Queue) int {
 	head := l.Head
 	for node.Previous != head {
 		if node.Previous.Previous == head {
-			l.Head = node
-			fmt.Println(node.Val, head.Val)
+
+			l.Head = node.Previous.Previous
+			fmt.Println(l.Head.Val)
+			fmt.Println(node.Val, head.Val, "dummy")
 		}
 		node = node.Previous
 	}
@@ -56,18 +58,17 @@ func main() {
 	queue(l, 10)
 
 	node := l.Tail
-	for node != nil{
-		fmt.Println(node.Val)
+	for node != nil {
+		fmt.Println(node.Val, "pre-dequeue")
 		node = node.Previous
 	}
 
-
-	fmt.Println(dequeue(l))
+	fmt.Println(dequeue(l), "returned value")
 
 	node2 := l.Tail
-	for node2 != nil{
-		fmt.Println(node2.Val)
+	for node2 != nil {
+		fmt.Println(node2.Val, "post-dequeue")
 		node2 = node2.Previous
 	}
-	
+
 }
