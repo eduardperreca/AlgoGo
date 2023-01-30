@@ -19,40 +19,48 @@ type Graph struct {
 	adjacents [][]Arch
 }
 
+type Node struct {
+	to     int
+	weight int
+}
+
 func shortestPath(g Graph, from int, to int) int {
-
-	if g.adjacents[from] == nil {
-		return -1
-	}
-
-	count := 0
 	visited := make(map[int]bool)
-	v := from
-	minTo := -1
-	min := 9999
-	for v != to {
-		visited[v] = true
-		for _, k := range g.adjacents[v] {
-			if k.weight < min {
-				min = k.weight
-				minTo = k.weight
+	queue := []Arch{}
+
+	queue = append(queue, Arch{0, 0})
+	visited[queue[0].direction] = true
+	i := 0
+	sum := 0
+	for len(queue) > 0 {
+		fmt.Println(queue)
+		node := queue[0]
+		fmt.Println("visiting: ", node)
+		min := 999
+		queue = queue[1:]
+		fmt.Println(queue)
+		nodeMin := Arch{0, 0}
+		if node.direction == to {
+			fmt.Println("end reached we spent: ", sum, "steps wow")
+			return sum
+		}
+		for i := range g.adjacents[node.direction] {
+			fmt.Println(g.adjacents[node.direction][i])
+			if g.adjacents[node.direction][i].weight < min && !visited[g.adjacents[node.direction][i].direction] {
+				visited[g.adjacents[node.direction][i].direction] = true
+				min = g.adjacents[node.direction][i].weight
+				nodeMin = g.adjacents[node.direction][i]
 			}
 		}
-
-		if !visited[minTo] {
-			count++
-			v = minTo
-		}
+		fmt.Println(min, "min", nodeMin)
+		queue = append(queue, nodeMin)
+		sum += nodeMin.weight
+		fmt.Println(queue)
+		i++
 	}
-	fmt.Println(visited)
 
-	if v == to {
-		fmt.Println("ci sono volute: ", count, "gallerie")
-		return count
-	} else {
-		fmt.Println(-1)
-		return -1
-	}
+	return -1
+
 }
 
 func main() {
@@ -91,8 +99,8 @@ func main() {
 
 	shortestPath(g, 0, node-1)
 
-	for i := 0; i < node; i++ {
-		fmt.Println(i, g.adjacents[i])
-	}
+	// for i := 0; i < node; i++ {
+	// 	fmt.Println(i, g.adjacents[i])
+	// }
 
 }

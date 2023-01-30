@@ -66,7 +66,7 @@ func main() {
 		dummy = []Node{}
 		// 7. Add the neighbors to the stack
 		if node.Row > 0 {
-			if _, ok := visited[Node{node.Row - 1, node.Column, matrix[node.Row-1][node.Column]}]; !ok {
+			if !visited[Node{node.Row - 1, node.Column, matrix[node.Row-1][node.Column]}] {
 				visited[Node{node.Row - 1, node.Column, matrix[node.Row-1][node.Column]}] = true
 				dummy = append(dummy, Node{node.Row - 1, node.Column, matrix[node.Row-1][node.Column]})
 			}
