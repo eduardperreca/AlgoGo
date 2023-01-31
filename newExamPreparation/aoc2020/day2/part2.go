@@ -27,7 +27,7 @@ func main() {
 		for _, k := range slice[2] {
 			parole = append(parole, string(k))
 		}
-		if parole[min-1] == rule && parole[max-1] == rule {
+		if (parole[min-1] == rule && parole[max-1] != rule) || (parole[min-1] != rule && parole[max-1] == rule){
 			count++
 		}
 
