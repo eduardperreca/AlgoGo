@@ -1,0 +1,5 @@
+tavolo: giardino + cavolo
+cavolo: sasso + gianni
+gianni: 2
+sasso: 3
+giardino: 1
