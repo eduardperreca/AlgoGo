@@ -2,8 +2,8 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"os"
+	"strings"
 )
 
 type Passport struct {
@@ -25,17 +25,11 @@ func main() {
 	for b.Scan() {
 		var dummy string
 		if b.Text() != "" {
-			dummy += b.Text() + " "
+			dummy = 
 			slice = append(slice, dummy)
 		} else {
 			bigSlice = append(bigSlice, slice)
 			slice = []string{}
-		}
-	}
-	fmt.Println(bigSlice)
-	for _, k := range bigSlice {
-		for _, x := range k {
-			fmt.Println(x)
 		}
 	}
 
